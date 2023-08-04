@@ -14,9 +14,30 @@ class _LoginScreenState extends State<LoginScreen> {
   void _onLoginButtonPressed() {
     String username = _usernameController.text;
     String password = _passwordController.text;
-    // Add your login logic here (e.g., authenticate the user).
-    print('Username: $username');
-    print('Password: $password');
+
+    if (username.isEmpty || password.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Hata'),
+            content: Text('Kullanıcı adı ve parola alanları boş bırakılamaz.'),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Tamam'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      print('Username: $username');
+      print('Password: $password');
+      // Diğer işlemler veya giriş kontrolü burada yapılabilir.
+    }
   }
 
   @override
